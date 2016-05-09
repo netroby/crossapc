@@ -27,6 +27,14 @@ class crossapc
         }
         return false;
     }
+    public static function cas($k, $ov, $nv) {
+        if (function_exists('apc_cas')) {
+            return apc_cas($k, $ov, $nv);
+        } elseif (function_exists('apcu_cas')) {
+            return apcu_cas($k, $ov, $nv);
+        }
+        return false;
+    }
     public static function delete($k) {
         if (function_exists('apc_delete')) {
             return apc_delete($k);
